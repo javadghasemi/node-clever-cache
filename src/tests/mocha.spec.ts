@@ -7,7 +7,12 @@ import {randomString} from "./helpers";
 import Cache from './../index';
 
 
-const localCache = new Cache({});
+const localCache = new Cache({
+  stdTTL: 0
+});
+const localCacheTTL = new Cache({
+  stdTTL: 0.3
+});
 
 
 describe(`${name}@${version} on node@${process.version}`, function () {
@@ -59,6 +64,7 @@ describe(`${name}@${version} on node@${process.version}`, function () {
 
     it('get multiple keys', async () => {
       const res = await localCache.mGet([data.multipleKeys[0].key, data.multipleKeys[1].key]);
+      console.log(res)
       should(data.multipleKeys).eql(res);
     });
 
@@ -89,6 +95,12 @@ describe(`${name}@${version} on node@${process.version}`, function () {
 
       should(data.value).eql(res);
       should(false).eql(hasRes);
+    });
+  });
+
+  describe('TTL', () => {
+    before(() => {
+
     });
   });
 });
