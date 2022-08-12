@@ -7,11 +7,12 @@
     "lib": "src/lib"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register src/tests/mocha.spec.ts"
+    "test": "mocha -r ts-node/register src/tests/mocha.spec.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "mocha": "^10.0.0",
     "should": "^13.2.3",
@@ -21,6 +22,5 @@
     "ts-node": "^10.9.1"
   },
   "dependencies": {
-
   }
 }

@@ -159,7 +159,7 @@ export default class SmartCache extends EventEmitter {
 
   private wrap(value: any, ttl: number): {time: number, value: any} {
     const now: number = Date.now();
-    let liveTime: number = 0;
+    let liveTime: number;
     const ttlMultiplicator: number = 1000;
 
     if (ttl === 0) liveTime = 0;
@@ -179,4 +179,6 @@ export default class SmartCache extends EventEmitter {
 
     return value.value;
   }
+
+  // public close() {}
 }

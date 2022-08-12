@@ -1,4 +1,4 @@
-import StoreInterface from "./../../interfaces/StoreInterface";
+import StoreInterface from "../../interfaces/StoreInterface";
 
 
 export default class Store implements StoreInterface {
