@@ -5,17 +5,16 @@ import Store from "./Store";
 
 export default class SmartCache extends EventEmitter {
   private store: Store;
-  private stats: { hits: number; vsize: number; ksize: number; keys: number; misses: number } = {
+  private stats: { hits: number; keys: number; misses: number } = {
     hits: 0,
     misses: 0,
-    keys: 0,
-    ksize: 0,
-    vsize: 0
+    keys: 0
   }
+
   private readonly defaultConfigs: SmartCacheConfig = {
     store: new Store(),
     forceString: false,
-    stdTTL: 0
+    stdTTL: 0,
   }
 
   constructor(private readonly config: SmartCacheConfig) {
@@ -179,6 +178,4 @@ export default class SmartCache extends EventEmitter {
 
     return value.value;
   }
-
-  // public close() {}
 }
