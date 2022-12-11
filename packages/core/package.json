@@ -1,0 +1,23 @@
+{
+  "name": "smart-cache",
+  "version": "0.0.1-alpha.0",
+  "type": "module",
+  "description": "",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@smart-cache/memory": "^0.0.1-alpha.0",
+    "@smart-cache/interface": "^0.0.1-alpha.0"
+  }
+}

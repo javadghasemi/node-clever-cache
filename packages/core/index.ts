@@ -1,18 +1,21 @@
 import EventEmitter from 'node:events';
-import {SmartCacheConfig} from "../../@types/SmartCacheConfig";
-import Store from "./Store";
+
+import StorageInterface from '@smart-cache/interface';
+
+import Memory from '@smart-cache/memory';
+
+type SmartCacheConfig = {
+  store?: StorageInterface,
+  forceString?: boolean,
+  maxKeys?: number,
+  stdTTL?: number
+};
 
 
 export default class SmartCache extends EventEmitter {
-  private store: Store;
-  private stats: { hits: number; keys: number; misses: number } = {
-    hits: 0,
-    misses: 0,
-    keys: 0
-  }
+  private store: StorageInterface;
 
   private readonly defaultConfigs: SmartCacheConfig = {
-    store: new Store(),
     forceString: false,
     stdTTL: 0,
   }
@@ -24,11 +27,7 @@ export default class SmartCache extends EventEmitter {
       ...this.config
     }
 
-    this.store = this.config.store;
-  }
-
-  public get getStats() {
-    return this.stats;
+    this.store = this.config.store ? this.config.store : new Memory();
   }
 
   public async get(key: string): Promise<any> {
@@ -39,36 +38,24 @@ export default class SmartCache extends EventEmitter {
       if key not found return undefined
        */
       if (!res) {
-        this.stats.misses++;
         return undefined;
       }
 
-      this.stats.hits++;
-      return this.unWrap(res);
+      return res;
     } catch (e) {
       throw e;
     }
   }
 
-  public async set(key: string, value: any, ttl: number = this.config.stdTTL): Promise<boolean> {
+  public async set(key: string, value: any): Promise<boolean> {
     try {
-      /*
-      check if cache is overflowing
-       */
-      if (this.config.maxKeys > -1 && this.stats.keys >= this.config.maxKeys)
-        throw new Error('cache over flow!!!');
       /*
       Force data to string
        */
       if (this.config.forceString && typeof value !== "string")
         value = JSON.stringify(value); // Try to serialize value to string!
 
-      await this.store.set(key, this.wrap(value, ttl));
-
-      /*
-       Increase stored key counter
-       */
-      this.stats.keys++;
+      await this.store.set(key, value);
 
       this.emit('set', key, value);
 
@@ -88,12 +75,7 @@ export default class SmartCache extends EventEmitter {
         await this.store.del(key);
         delCount += 1;
 
-        /*
-        calculate stats
-        */
-        this.stats.keys--;
-
-        this.emit('del', key, this.unWrap(oldValue));
+        this.emit('del', key, oldValue);
       }
     }
 
@@ -101,7 +83,7 @@ export default class SmartCache extends EventEmitter {
   }
 
   public async mGet(keys: string[]): Promise<[{ key: string, val: any }]> {
-    let values: [{ key: string; val: any; }];
+    let values: [{ val: any; key: string }];
     /*
     Set each value to store
      */
@@ -114,11 +96,11 @@ export default class SmartCache extends EventEmitter {
     return values;
   }
 
-  public async mSet(keyValueSet: [{ key: string, val: any, ttl?: number}]): Promise<boolean> {
+  public async mSet(keyValueSet: [{ key: string, val: any}]): Promise<boolean> {
     try {
       for (const obj of keyValueSet) {
-        const {key, val, ttl} = obj;
-        await this.set(key, val, ttl);
+        const {key, val} = obj;
+        await this.set(key, val);
       }
 
       return true;
@@ -132,7 +114,7 @@ export default class SmartCache extends EventEmitter {
       const res = await this.store.get(key);
       if (res) await this.store.del(key);
 
-      return this.unWrap(res);
+      return res;
     } catch (e) {
       throw e;
     }
@@ -154,28 +136,5 @@ export default class SmartCache extends EventEmitter {
     } catch (e) {
       throw e;
     }
-  }
-
-  private wrap(value: any, ttl: number): {time: number, value: any} {
-    const now: number = Date.now();
-    let liveTime: number;
-    const ttlMultiplicator: number = 1000;
-
-    if (ttl === 0) liveTime = 0;
-    else if (ttl) liveTime = now + (ttl * ttlMultiplicator);
-    else {
-      this.config.stdTTL === 0 ? liveTime = this.config.stdTTL : liveTime = now + (this.config.stdTTL * ttlMultiplicator);
-    }
-
-    return {
-      time: liveTime,
-      value: value
-    };
-  }
-
-  private unWrap(value: {value?: any, time: number}): any {
-    if (!value.value) return null;
-
-    return value.value;
   }
 }

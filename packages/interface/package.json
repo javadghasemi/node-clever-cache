@@ -1,0 +1,15 @@
+{
+  "name": "@smart-cache/interface",
+  "type": "module",
+  "version": "0.0.1-alpha.0",
+  "description": "",
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "author": "Javad Ghasemi",
+  "license": "MIT"
+}

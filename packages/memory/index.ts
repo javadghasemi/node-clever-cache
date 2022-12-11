@@ -1,11 +1,9 @@
-import StoreInterface from "../../interfaces/StoreInterface";
+import StorageInterface from '@smart-cache/interface';
 
-
-export default class Store implements StoreInterface {
+export default class Memory implements StorageInterface {
   private cacheContainer: Map<string, any> = new Map();
 
-
-  public set(key: string, value: any, ttl?: number): boolean {
+  public set(key: string, value: any): boolean {
     this.cacheContainer.set(key, value);
 
     return true;
