@@ -11,8 +11,8 @@
     "@smart-cache/interface": "^0.0.1-alpha.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc"
   },
-  "author": "",
+  "author": "Javad Ghasemi",
   "license": "MIT"
 }
