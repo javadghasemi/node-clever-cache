@@ -23,3 +23,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16'
+
+      - name: Install dependencies
+        run: | # Install and link dependencies
+          npm ci
+          npx lerna bootstrap
+
+      - name: Run tests # Run tests of all packages
+          run: npm run test
