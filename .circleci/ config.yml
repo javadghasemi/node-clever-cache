@@ -1,0 +1,22 @@
+version: 2.1
+
+orb:
+  node: circleci/node@18
+
+jobs:
+  build:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      -run:
+        command: npm run test
+      -run:
+        command: npm run build
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build

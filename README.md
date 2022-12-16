@@ -5,15 +5,15 @@ A simple caching module that has `set`, `get` and `delete` method and can change
 # Install
 
 ```
-npm install node-smart-cache --save
+npm install clever-cache --save
 ```
 
 Initialize:
 ----
 
 ```javascript
-const SmartCache = require('node-smart-cache');
-const cache = new SmartCache();
+const CleverCache = require('clever-cache');
+const cache = new CleverCache();
 ```
 
 ### Options

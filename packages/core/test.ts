@@ -1,22 +1,13 @@
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
-
 import { expect } from '@jest/globals';
 import { v4 as uuid } from 'uuid';
 
-import SmartCache from './index.js';
+import CleverCache from './src/index.js';
 
-const packageJson = JSON.parse(
-  readFileSync(resolve(__dirname + '/package.json')).toString()
-);
-const name = packageJson.name;
-const version = packageJson.version;
+const cleverCache: CleverCache = new CleverCache();
 
-const smartCache: SmartCache = new SmartCache();
-
-describe(`${name}@${version} on node@${process.version}`, function () {
-  describe('sync style', function () {
-    let data = {
+describe(`clever-cache Tests`, () => {
+  describe('sync style', () => {
+    const data = {
       value: uuid(),
       value1: uuid(),
       value2: uuid(),
@@ -43,27 +34,27 @@ describe(`${name}@${version} on node@${process.version}`, function () {
     };
 
     it('set value', async () => {
-      const res = await smartCache.set(data.key, data.value);
+      const res = await cleverCache.set(data.key, data.value);
       expect(res).toBe(true);
     });
 
     it('get value - value exist', async () => {
-      const res = await smartCache.get(data.key);
+      const res = await cleverCache.get(data.key);
       expect(res).toBe(data.value);
     });
 
     it('get value - value not exist', async () => {
-      const res = await smartCache.get('not found key');
+      const res = await cleverCache.get('not found key');
       expect(res).toBe(undefined);
     });
 
     it('set multiple values', async () => {
-      const res = await smartCache.mSet(data.multipleKeys);
+      const res = await cleverCache.mSet(data.multipleKeys);
       expect(res).toBe(true);
     });
 
     it('get multiple keys', async () => {
-      const res = await smartCache.mGet([
+      const res = await cleverCache.mGet([
         data?.multipleKeys[0]?.key || '',
         data?.multipleKeys[1]?.key || '',
       ]);
@@ -71,7 +62,7 @@ describe(`${name}@${version} on node@${process.version}`, function () {
     });
 
     it('get key names', async () => {
-      const res = await smartCache.keys();
+      const res = await cleverCache.keys();
       expect([
         data.key,
         data.multipleKeys[0]?.key,
@@ -80,24 +71,24 @@ describe(`${name}@${version} on node@${process.version}`, function () {
     });
 
     it('has key', async () => {
-      const res = await smartCache.has(data.key);
+      const res = await cleverCache.has(data.key);
       expect(res).toBe(true);
     });
 
     it('does not have key', async () => {
-      const res = await smartCache.has('not exist key');
+      const res = await cleverCache.has('not exist key');
       expect(res).toBe(false);
     });
 
     it('delete value', async () => {
-      const res = await smartCache.del(data.key);
+      const res = await cleverCache.del(data.key);
       expect(1).toBe(res);
     });
 
     it('take value', async () => {
-      await smartCache.set('takenValue', data.value);
-      const res = await smartCache.take('takenValue');
-      const hasRes = await smartCache.has('takenValue');
+      await cleverCache.set('takenValue', data.value);
+      const res = await cleverCache.take('takenValue');
+      const hasRes = await cleverCache.has('takenValue');
 
       expect(data.value).toBe(res);
       expect(false).toBe(hasRes);

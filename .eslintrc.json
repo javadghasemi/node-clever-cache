@@ -22,6 +22,8 @@
     "default-param-last": "off",
     "padding-line-between-statements": "off",
     "no-eq-null": "off",
+    "no-await-in-loop": "off",
+    "no-negated-condition": "off",
     "eqeqeq": [
       "error",
       "always",
@@ -30,7 +32,7 @@
       }
     ],
     "prettier/prettier": "error",
-    "unicorn/prefer-module": "error",
+    "unicorn/prefer-module": "off",
     "unicorn/prefer-node-protocol": "error"
   },
   "overrides": [

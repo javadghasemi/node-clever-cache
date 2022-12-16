@@ -1,9 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "paths": {
-      "@smart-cache/interface": ["./../interface"]
-    }
+    "outDir": "./dist"
   },
+  "include": ["./src"]
 }
