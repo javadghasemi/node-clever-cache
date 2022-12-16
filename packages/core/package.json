@@ -19,5 +19,6 @@
   "dependencies": {
     "@clever-cache/interface": "^0.1.0-alpha.0",
     "@clever-cache/memory": "^0.1.0-alpha.0"
-  }
+  },
+  "gitHead": "45a74af65502fe2e3c0a2e92711c45949f662ea8"
 }

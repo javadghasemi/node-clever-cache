@@ -14,5 +14,6 @@
     "tsc": "tsc"
   },
   "author": "Javad Ghasemi",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "45a74af65502fe2e3c0a2e92711c45949f662ea8"
 }
