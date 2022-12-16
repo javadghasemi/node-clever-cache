@@ -9,21 +9,25 @@ on:
 permissions:
   contents: read
 
-
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [ 16.x ]
-
     steps:
-      - uses: actions/checkout@v3
+      - name: "Checkout"
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Setup node
+      - name: "Setup nodeJS"
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '16'
+
+      - name: Install dependencies
+        run: | # Install and link dependencies
+          npm ci
+          npx lerna bootstrap
+
+      - name: Run tests # Run tests of all packages
+        run: npm run test

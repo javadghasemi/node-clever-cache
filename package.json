@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap --no-ci",
-    "publish": "lerna run tsc && lerna publish",
+    "publish": "npm run build && lerna publish",
     "pretest": "npm run clean && lerna run tsc && eslint . --ext .js --ext .ts",
     "jest": "jest",
     "test": "npm run jest",

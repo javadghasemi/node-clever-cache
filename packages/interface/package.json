@@ -1,7 +1,7 @@
 {
   "name": "@clever-cache/interface",
   "type": "commonjs",
-  "version": "0.0.1-alpha.0",
+  "version": "0.1.1-alpha.0",
   "typings": "dist/index.d.ts",
   "main": "dist/index.js",
   "files": [
@@ -11,5 +11,6 @@
     "tsc": "tsc"
   },
   "author": "Javad Ghasemi",
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "45a74af65502fe2e3c0a2e92711c45949f662ea8"
 }
