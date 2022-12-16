@@ -1,4 +1,4 @@
-import StorageInterface from '@smart-cache/interface';
+import StorageInterface from '@clever-cache/interface';
 
 export default class Memory implements StorageInterface {
   private cacheContainer: Map<string, any> = new Map();

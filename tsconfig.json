@@ -1,7 +1,4 @@
 {
   "extends": "@sindresorhus/tsconfig",
-  "include": ["packages"],
-  "ts-node": {
-    "esm": true
-  }
+  "include": ["packages"]
 }

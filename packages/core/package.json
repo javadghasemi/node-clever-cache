@@ -1,7 +1,7 @@
 {
-  "name": "smart-cache",
+  "name": "clever-cache",
   "version": "0.0.1-alpha.0",
-  "type": "module",
+  "type": "commonjs",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -17,7 +17,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@smart-cache/memory": "^0.0.1-alpha.0",
-    "@smart-cache/interface": "^0.0.1-alpha.0"
+    "@clever-cache/memory": "^0.0.1-alpha.0",
+    "@clever-cache/interface": "^0.0.1-alpha.0"
   }
 }

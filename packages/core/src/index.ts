@@ -1,23 +1,23 @@
-import { EventEmitter } from 'events';
+import { EventEmitter } from 'node:events';
 
-import StorageInterface from '@smart-cache/interface';
+import StorageInterface from '@clever-cache/interface';
 
-import Memory from '@smart-cache/memory';
+import Memory from '@clever-cache/memory';
 
-type SmartCacheConfig = {
+type CleverCacheConfig = {
   storage?: StorageInterface;
   forceString?: boolean;
   maxKeys?: number;
 };
 
-export default class SmartCache extends EventEmitter {
+export default class CleverCache extends EventEmitter {
   private storage: StorageInterface;
 
-  private readonly config: SmartCacheConfig = {
+  private readonly config: CleverCacheConfig = {
     forceString: false,
   };
 
-  constructor(private readonly userConfig?: SmartCacheConfig) {
+  constructor(private readonly userConfig?: CleverCacheConfig) {
     super();
     this.config = {
       ...this.userConfig,
@@ -31,7 +31,7 @@ export default class SmartCache extends EventEmitter {
     const res = await this.storage.get(key);
 
     /*
-    if key not found return undefined
+    If key not found return undefined
      */
     if (!res) {
       return undefined;
@@ -58,7 +58,7 @@ export default class SmartCache extends EventEmitter {
     if (!Array.isArray(keys)) keys = [keys];
 
     let delCount = 0;
-    for (let key of keys) {
+    for (const key of keys) {
       const oldValue = await this.storage.get(key);
       if (oldValue) {
         await this.storage.del(key);
