@@ -19,6 +19,7 @@ jobs:
         node-version: [ 16.x ]
 
     steps:
+      - name: Checkout
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -27,3 +28,5 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+        - run: npm ci
+        - run: npm run test
