@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
 
     strategy:
@@ -18,14 +18,17 @@ jobs:
         node-version: [ 16.x ]
 
     steps:
-      - name: Checkout
-      - uses: actions/checkout@v3
+      - name: "Checkout"
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Setup node
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-#
-#      - run: npm ci
-#      - run: npm run test
+
+      - name: "Setup node"
+        uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+
+      - name: "Setup npm"
+        run: |
+          npm ci
+          npm test
