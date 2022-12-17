@@ -11,7 +11,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --no-ci",
     "publish": "npm run build && lerna publish",
-    "publish:beta": "npm run build && lerna publish --npm-tag=beta --access public",
+    "publish:beta": "npm run build && lerna publish --npm-tag=beta",
     "pretest": "npm run clean && lerna run tsc && eslint . --ext .js --ext .ts",
     "jest": "jest",
     "test": "npm run jest",
