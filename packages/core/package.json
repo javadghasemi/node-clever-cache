@@ -1,6 +1,6 @@
 {
   "name": "clever-cache",
-  "version": "0.1.1-alpha.0",
+  "version": "0.1.1-alpha.1",
   "type": "commonjs",
   "description": "Simple and driveable NodeJS caching",
   "homepage": "https://github.com/javadghasemi/node-clever-cache#readme",
@@ -22,8 +22,8 @@
   "author": "Javad Ghasemi",
   "license": "MIT",
   "dependencies": {
-    "@clever-cache/interface": "^0.1.1-alpha.0",
-    "@clever-cache/memory": "^0.1.1-alpha.0"
+    "@clever-cache/interface": "^0.1.1-alpha.1",
+    "@clever-cache/memory": "^0.1.1-alpha.1"
   },
   "gitHead": "45a74af65502fe2e3c0a2e92711c45949f662ea8"
 }

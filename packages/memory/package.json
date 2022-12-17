@@ -1,14 +1,14 @@
 {
   "name": "@clever-cache/memory",
   "type": "commonjs",
-  "version": "0.1.1-alpha.0",
+  "version": "0.1.1-alpha.1",
   "typings": "dist/index.d.ts",
   "main": "dist/index.js",
   "files": [
     "dist/"
   ],
   "dependencies": {
-    "@clever-cache/interface": "^0.1.1-alpha.0"
+    "@clever-cache/interface": "^0.1.1-alpha.1"
   },
   "scripts": {
     "tsc": "tsc"
