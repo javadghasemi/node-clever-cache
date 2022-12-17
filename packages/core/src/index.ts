@@ -1,8 +1,8 @@
 import { EventEmitter } from 'node:events';
 
-import StorageInterface from '@clever-cache/interface';
+import { StorageInterface } from '@clever-cache/interface';
 
-import Memory from '@clever-cache/memory';
+import { Memory } from '@clever-cache/memory';
 
 type CleverCacheConfig = {
   storage?: StorageInterface;
@@ -10,7 +10,7 @@ type CleverCacheConfig = {
   maxKeys?: number;
 };
 
-export default class CleverCache extends EventEmitter {
+export class CleverCache extends EventEmitter {
   private storage: StorageInterface;
 
   private readonly config: CleverCacheConfig = {

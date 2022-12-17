@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals';
 import { v4 as uuid } from 'uuid';
 
-import CleverCache from './src/index.js';
+import { CleverCache } from './src';
 
 const cleverCache: CleverCache = new CleverCache();
 

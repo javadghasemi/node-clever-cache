@@ -1,7 +1,7 @@
 import { expect } from '@jest/globals';
 import { v4 as uuid } from 'uuid';
 
-import Memory from './src/index.js';
+import { Memory } from './src';
 
 const memory = new Memory();
 
