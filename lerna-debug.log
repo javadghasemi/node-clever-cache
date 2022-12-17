@@ -1,0 +1,8 @@
+58 error Error: Command failed with exit code 128: git push --follow-tags --no-verify --atomic origin fix-export-bug-and-edit-readme
+58 error ssh: Could not resolve hostname github.com: Name or service not known
+58 error fatal: Could not read from remote repository.
+58 error
+58 error Please make sure you have the correct access rights
+58 error and the repository exists.
+58 error     at makeError (D:\personal_projects\nodejs_packages\smart-cache-new-structure\node_modules\execa\lib\error.js:60:11)
+58 error     at handlePromise (D:\personal_projects\nodejs_packages\smart-cache-new-structure\node_modules\execa\index.js:118:26)

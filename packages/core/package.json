@@ -3,6 +3,18 @@
   "version": "0.1.1-alpha.1",
   "type": "commonjs",
   "description": "Simple and driveable NodeJS caching",
+  "keywords": [
+    "cache",
+    "clever",
+    "clever-cache",
+    "memory",
+    "caching",
+    "driverable",
+    "node",
+    "object",
+    "local",
+    "in-memory"
+  ],
   "homepage": "https://github.com/javadghasemi/node-clever-cache#readme",
   "repository": {
     "type": "git",
