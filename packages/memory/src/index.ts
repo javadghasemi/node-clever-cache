@@ -1,6 +1,6 @@
-import StorageInterface from '@clever-cache/interface';
+import { StorageInterface } from '@clever-cache/interface';
 
-export default class Memory implements StorageInterface {
+export class Memory implements StorageInterface {
   private cacheContainer: Map<string, any> = new Map();
 
   public set(key: string, value: any): boolean {

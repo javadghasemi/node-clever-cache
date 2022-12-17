@@ -12,15 +12,13 @@ Initialize:
 ----
 
 ```javascript
-const CleverCache = require('clever-cache');
+const { CleverCache } = require('clever-cache');
 const cache = new CleverCache();
 ```
 
 ### Options
 
-* `store`: _(Default is `Memory`)_ The storage you want to use for store your data.
-* `maxKeys`: (default: -1) specifies a maximum amount of keys that can be stored in the cache. If a new item is set and
-  the cache is full, an error is thrown and the key will not be saved in the cache. -1 disables the key limit.
+* `storage`: _(Default is `Memory`)_ The storage you want to use for store your data.
 
 Store a key (set):
 ---

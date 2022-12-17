@@ -1,4 +1,4 @@
-export default interface StorageInterface {
+export interface StorageInterface {
   get(key: string): any | Promise<any>;
   set(key: string, value: any, ttl?: number): boolean | Promise<boolean>;
   del(key: string): boolean | Promise<boolean>;
