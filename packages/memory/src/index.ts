@@ -5,8 +5,14 @@ type MemoryStorageOptions = {
   checkExpired?: number; // Time in second to check and drop expired keys
 };
 
+type cacheSaveStructure = {
+  ttl: number;
+  value: any;
+};
+
 export class Memory implements StorageInterface {
-  private cacheContainer: Map<string, any> = new Map();
+  private cacheContainer: Map<string | any, any> = new Map();
+
   private readonly options: MemoryStorageOptions = {
     stdTTL: 0,
     checkExpired: 600,
@@ -17,6 +23,8 @@ export class Memory implements StorageInterface {
       ...options,
       ...this.options,
     };
+
+    this.checkExpired();
   }
 
   public set(
@@ -52,7 +60,7 @@ export class Memory implements StorageInterface {
     return this.cacheContainer.has(key);
   }
 
-  private wrap(value: any, ttl: number | undefined): { value: any; ttl: number } {
+  private wrap(value: any, ttl: number | undefined): cacheSaveStructure {
     const now = Date.now();
     let liveTime = 0;
 
@@ -72,9 +80,31 @@ export class Memory implements StorageInterface {
     };
   }
 
-  private unwrap(wrappedValue: { value: any; ttl: number }): any {
+  private unwrap(wrappedValue: cacheSaveStructure): any {
     if (wrappedValue.value) return wrappedValue.value;
 
     return null;
+  }
+
+  private check(key: string | any, data: cacheSaveStructure) {
+    if (data.ttl !== 0 && data.ttl < Date.now()) {
+      this.del(key);
+    }
+  }
+
+  private checkExpired(startCheck = true): void {
+    for (const key of this.cacheContainer.entries()) {
+      this.check(key, this.cacheContainer.get(key));
+    }
+
+    if (startCheck && this.options.checkExpired) {
+      const checkTimeout = setTimeout(
+        this.checkExpired,
+        this.options.checkExpired * 1000,
+        startCheck
+      );
+
+      if (checkTimeout && checkTimeout.unref) checkTimeout.unref();
+    }
   }
 }
