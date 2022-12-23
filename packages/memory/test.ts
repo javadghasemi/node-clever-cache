@@ -5,6 +5,10 @@ import { Memory } from './src';
 
 const memory = new Memory();
 
+const memoryTTL = new Memory({
+  stdTTL: 0.3,
+});
+
 describe('Memory storage driver Tests', () => {
   const data = {
     value: uuid(),
@@ -51,5 +55,38 @@ describe('Memory storage driver Tests', () => {
     expect(res).toBe(false);
   });
 
-  describe('TTL Tests', () => {});
+  describe('With TTL', () => {
+    describe('Has validates expired TTL', () => {
+      const data = {
+        key: uuid(),
+        val: uuid(),
+      };
+
+      it('set a key with ttl', () => {
+        expect(memoryTTL.set(data.key, data.val, 0.7)).toBe(true);
+      });
+
+      it('check TTL key immediately', () => {
+        expect(memoryTTL.has(data.key)).toBe(true);
+      });
+
+      it('before it times out', (done) => {
+        setTimeout(() => {
+          const status = memoryTTL.has(data.key);
+          expect(status).toBe(true);
+          expect(memoryTTL.get(data.key)).toBe(data.val);
+          done();
+        }, 20);
+      });
+
+      it('after it timed out', (done) => {
+        setTimeout(() => {
+          const status = memoryTTL.has(data.key);
+          expect(status).toBe(true);
+          expect(memoryTTL.get(data.key)).toBeUndefined();
+          done();
+        }, 900);
+      });
+    });
+  });
 });
