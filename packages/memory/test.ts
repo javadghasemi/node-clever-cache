@@ -7,6 +7,7 @@ const memory = new Memory();
 
 const memoryTTL = new Memory({
   stdTTL: 0.3,
+  checkExpired: 0.5,
 });
 
 describe('Memory storage driver Tests', () => {
@@ -82,7 +83,7 @@ describe('Memory storage driver Tests', () => {
       it('after it timed out', (done) => {
         setTimeout(() => {
           const status = memoryTTL.has(data.key);
-          expect(status).toBe(true);
+          expect(status).toBe(false);
           expect(memoryTTL.get(data.key)).toBeUndefined();
           done();
         }, 900);

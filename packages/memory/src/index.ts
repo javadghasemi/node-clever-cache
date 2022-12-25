@@ -20,8 +20,8 @@ export class Memory implements StorageInterface {
 
   constructor(options?: MemoryStorageOptions) {
     this.options = {
-      ...options,
       ...this.options,
+      ...options,
     };
 
     this.checkExpired();
@@ -93,13 +93,13 @@ export class Memory implements StorageInterface {
   }
 
   private checkExpired(startCheck = true): void {
-    for (const key of this.cacheContainer.entries()) {
-      this.check(key, this.cacheContainer.get(key));
+    for (const [key, value] of this.cacheContainer.entries()) {
+      this.check(key, value);
     }
 
     if (startCheck && this.options.checkExpired) {
       const checkTimeout = setTimeout(
-        this.checkExpired,
+        this.checkExpired.bind(this),
         this.options.checkExpired * 1000,
         startCheck
       );
